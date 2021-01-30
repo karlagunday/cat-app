@@ -18,8 +18,48 @@ export default class Base {
    * @return {Promise} Data retrieved from the API
    */
   retrieve(options = {}) {
+    return this.get(this.resourceUrl(), options);
+  }
+
+  /**
+   * Retrieves data from the API based on the provided search criteria
+   * @param {Object} filters Object of filter/search criteria
+   * @param {Object} options Optional request options supported by Axios
+   * @return {Promise} Data retrieved from the API
+   */
+  search(filters = {}, options = {}) {
+    // add filters as parameters
+    if (!options.params && typeof options.params !== 'object') {
+      options.params = {};
+    }
+    options.params = {
+      ...options.params,
+      ...filters,
+    };
+
+    const url = `${this.resourceUrl()}/search`;
+    return this.get(url, options);
+  }
+
+  /**
+   * Generates the entity resource API URL
+   */
+  resourceUrl() {
     if (!this.resource) {
       throw new Error('No resource specified.');
+    }
+    return `${this.sourceURL}/${this.resource}`;
+  }
+
+  /**
+   *
+   * @param {url} url String of URL endpoint
+   * @param {Object} options Optional request options supported by axios
+   * @return {Mixed} Response data
+   */
+  get(url, options = {}) {
+    if (!url) {
+      throw new Error('No URL specified.');
     }
 
     // add authentication
@@ -30,10 +70,8 @@ export default class Base {
       ...options.headers,
       'x-api-key': this.apiKey, // make sure configured API key will always take precedence
     };
-
-    // @TODO - require `resource`?
     return axios
-      .get(`${this.sourceURL}/${this.resource}`, options)
+      .get(url, options)
       .then((result) => result.data)
       .catch((error) => {
         // @TODO - should this be an error code instead?
