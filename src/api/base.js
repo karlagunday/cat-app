@@ -18,7 +18,7 @@ export default class Base {
    * @return {Promise} Data retrieved from the API
    */
   retrieve(options = {}) {
-    return this.get(this.resourceUrl(), options);
+    return this.get('', options);
   }
 
   /**
@@ -36,9 +36,7 @@ export default class Base {
       ...options.params,
       ...filters,
     };
-
-    const url = `${this.resourceUrl()}/search`;
-    return this.get(url, options);
+    return this.get('/search', options);
   }
 
   /**
@@ -53,14 +51,13 @@ export default class Base {
 
   /**
    * Executes a GET request to the source API
-   * @param {url} url String of URL endpoint
+   * @param {String} endpoint Optional String of URL endpoint
    * @param {Object} options Optional request options supported by axios
    * @return {Promise} Response data
    */
-  get(url, options = {}) {
-    if (!url) {
-      throw new Error('No URL specified.');
-    }
+  get(endpoint = '', options = {}) {
+    // determine request URL
+    const url = `${this.resourceUrl()}${endpoint}`;
 
     // add authentication
     if (!options.headers && typeof options.headers !== 'object') {
