@@ -52,7 +52,7 @@ export default class Base {
   }
 
   /**
-   *
+   * Executes a GET request to the source API
    * @param {url} url String of URL endpoint
    * @param {Object} options Optional request options supported by axios
    * @return {Promise} Response data
