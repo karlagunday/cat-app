@@ -17,11 +17,12 @@ describe('API functions', () => {
       breeds = data;
     });
   });
-  it('should retrieve a list of images filtered by a specific breed', () => {
+  it('should retrieve a list of paginated images filtered by a specific breed', () => {
     const breed = breeds[0]; // breed to filter results
     return new Image()
       .search({
         breed_id: breed.id,
+        limit: 2,
       })
       .then((data) => {
         expect(data).toStrictEqual(
@@ -36,6 +37,9 @@ describe('API functions', () => {
             }),
           ]),
         );
+        // make sure results reflects the pagination parameters
+        expect(data).toHaveLength(2);
+        // @TODO - test `page` and `order`
       });
   });
 });
