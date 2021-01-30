@@ -55,7 +55,7 @@ export default class Base {
    *
    * @param {url} url String of URL endpoint
    * @param {Object} options Optional request options supported by axios
-   * @return {Mixed} Response data
+   * @return {Promise} Response data
    */
   get(url, options = {}) {
     if (!url) {
