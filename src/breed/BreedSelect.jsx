@@ -56,6 +56,7 @@ class BreedSelect extends Component {
           as="select"
           custom
           onChange={this.handleChange}
+          disabled={this.props.loading}
         >
           <option value="">Select Breed</option>
           {
@@ -77,7 +78,8 @@ class BreedSelect extends Component {
 const mapSteteToProps = state => {
   return {
     selectedBreed: state.filter.breed,
-    images: state.images
+    images: state.images,
+    loading: state.loading
   }
 }
 const mapDispatchToProps = dispatch => {
