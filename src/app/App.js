@@ -4,7 +4,7 @@ import Homepage from '../homepage/Homepage';
 function App() {
   return (
     <div className="App">
-      <header>
+      <header className="App-header">
         <h1>Cat Browser</h1>
       </header>
       <Homepage />

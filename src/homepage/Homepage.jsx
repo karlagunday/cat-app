@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import BreedSelect from '../breed/BreedSelect'
+import ImageList from '../image/ImageList'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 
+/**
+ * Component to render the homepage
+ */
 class Homepage extends Component {
   constructor(props) {
     super(props);
@@ -11,10 +15,15 @@ class Homepage extends Component {
     return (
       <Container>
         <Row>
-          <Col>
+          <Col sm={3}>
             <Form className="filter">
-              <BreedSelect label="Breed" name="breed" id="breed"/>
+              <Form.Group controlId="filter.SelectBreed" className="text-left">
+                <BreedSelect label="Breed" name="breed" id="breed"/>
+              </Form.Group>
             </Form>
+          </Col>
+          <Col>
+            <ImageList />
           </Col>
         </Row>
       </Container>

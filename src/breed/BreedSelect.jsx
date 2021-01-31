@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { Form } from 'react-bootstrap';
 import Breed from '../api/breed'
+import { setImageFilter, fetchImages } from '../actions';
 
+/**
+ * Component for the breed selection
+ */
 class BreedSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
       api: new Breed(), // class to connect to the api
-      breeds: []
+      breeds: [],
+      value: this.props.selectedBreed // default to state
     }
   }
   componentDidMount() {
@@ -19,11 +25,31 @@ class BreedSelect extends Component {
         })
       })
   }
+  handleChange = (event) => {
+
+    // make sure the current state of the component is updated
+    const breed = event.target.value
+    this.setState({
+      value: breed
+    })
+
+    // dispatch fetching of images with the provided filter params
+    this.props.fetchImages({
+      breed_id: breed,
+      page: 1,
+      limit: 10 // @TODO - handle pagination better?
+    })
+  }
   render() {
     return (
       <React.Fragment>
         <Form.Label>{this.props.label}</Form.Label>
-        <Form.Control as="select">
+        <Form.Control
+          value={this.state.value}
+          as="select"
+          custom
+          onChange={this.handleChange}
+        >
           <option value="">Select Breed</option>
           {
             this.state.breeds.map(breed => {
@@ -39,4 +65,21 @@ class BreedSelect extends Component {
   }
 }
 
-export default BreedSelect;
+// connect component to store
+// @TODO - create a `selectors` file?
+const mapSteteToProps = state => {
+  return {
+    selectedBreed: state.filter.breed,
+    images: state.images
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    setImageFilter: (filter) => dispatch(setImageFilter(filter)),
+    fetchImages: (filter) => dispatch(fetchImages(filter)),
+  }
+}
+export default connect(
+  mapSteteToProps,
+  mapDispatchToProps
+)(BreedSelect);
