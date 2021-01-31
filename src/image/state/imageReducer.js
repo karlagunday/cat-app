@@ -10,7 +10,7 @@ const initialState = {
   images: [],
   error: '',
   filter: {}, // by default, no filter is applied
-  page: 1,
+  page: 0,
   limit: 10,
 };
 

@@ -36,7 +36,7 @@ class BreedSelect extends Component {
     // dispatch fetching of images with the provided filter params
     this.props.fetchImages({
       breed_id: breed,
-      page: 1,
+      page: 0, // every time breed changes, start at the first page
       limit: 10 // @TODO - handle pagination better?
     })
   }
