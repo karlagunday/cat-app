@@ -60,6 +60,7 @@ const imageReducer = (state = initialState, action) => {
     case SET_TO_END_OF_PAGE:
       return {
         ...state,
+        loading: false,
         endOfPage: true,
       };
     default:
