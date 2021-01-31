@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import ImageCard from './ImageCard'
 import './ImageList.css'
+import { showMoreImages } from '../actions'
 
 /**
  * Component to wrap the list of images
@@ -11,6 +12,10 @@ class ImageList extends Component {
   constructor(props) {
     super(props);
     this.state = {  }
+  }
+  handleClick = () => {
+    // make sure current page will be updated
+    this.props.showMoreImages()
   }
   render() {
     let content;
@@ -22,14 +27,16 @@ class ImageList extends Component {
 
     // display results as cards
     content = this.props.images.map(image => {
-      return <Col className="m-2" md={5}><ImageCard imageUrl={image.url} id={image.id} /></Col>
+      return <Col key={image.id} className="m-2" md={5}><ImageCard imageUrl={image.url} id={image.id} /></Col>
     })
     return (
       <Container className="list">
         <Row>
           { content }
         </Row>
+        { this.props.endOfPage === false ? <Button onClick={this.handleClick} variant="primary">Load More</Button>: '' }
       </Container>
+
      );
   }
 }
@@ -39,8 +46,15 @@ class ImageList extends Component {
 const mapSteteToProps = state => {
   return {
     images: state.images,
-    loading: state.loading
+    loading: state.loading,
+    page: state.filter.page,
+    endOfPage: state.endOfPage,
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    showMoreImages: () => dispatch(showMoreImages()),
   }
 }
 
-export default connect(mapSteteToProps)(ImageList);
+export default connect(mapSteteToProps, mapDispatchToProps)(ImageList);

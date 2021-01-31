@@ -3,6 +3,8 @@ import {
   FETCH_FILTERED_IMAGES_REQUEST,
   FETCH_FILTERED_IMAGES_SUCCESS,
   FETCH_FILTERED_IMAGES_FAILURE,
+  CLEAR_IMAGES,
+  SET_TO_END_OF_PAGE,
 } from './imageActionTypes';
 
 const initialState = {
@@ -12,6 +14,7 @@ const initialState = {
   filter: {}, // by default, no filter is applied
   page: 0,
   limit: 10,
+  endOfPage: false,
 };
 
 const imageReducer = (state = initialState, action) => {
@@ -47,6 +50,17 @@ const imageReducer = (state = initialState, action) => {
         loading: false,
         images: [],
         error: action.payload.error,
+      };
+    case CLEAR_IMAGES:
+      return {
+        ...state,
+        images: [],
+        endOfPage: false, // clearing the images will reset page back to beginning
+      };
+    case SET_TO_END_OF_PAGE:
+      return {
+        ...state,
+        endOfPage: true,
       };
     default:
       return state;

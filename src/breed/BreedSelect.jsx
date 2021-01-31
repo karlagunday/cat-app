@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Form } from 'react-bootstrap';
 import Breed from '../api/breed'
-import { setImageFilter, fetchImages } from '../actions';
+import { setImageFilter, fetchImages, clearImages } from '../actions';
 
 /**
  * Component for the breed selection
@@ -33,12 +33,19 @@ class BreedSelect extends Component {
       value: breed
     })
 
-    // dispatch fetching of images with the provided filter params
-    this.props.fetchImages({
-      breed_id: breed,
-      page: 0, // every time breed changes, start at the first page
-      limit: 10 // @TODO - handle pagination better?
-    })
+    // since filter has been changed, the current list needs to be cleared first
+    this.props.clearImages()
+
+    // only fetch images if breed filter is provided
+    if (breed) {
+      // dispatch fetching of images with the provided filter params
+      this.props.fetchImages({
+        breed_id: breed,
+        page: 0, // every time breed changes, start at the first page
+        limit: 10, // @TODO - handle pagination better?
+        order: 'Asc'
+      })
+    }
   }
   render() {
     return (
@@ -75,6 +82,7 @@ const mapSteteToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
+    clearImages: () => dispatch(clearImages()),
     setImageFilter: (filter) => dispatch(setImageFilter(filter)),
     fetchImages: (filter) => dispatch(fetchImages(filter)),
   }
