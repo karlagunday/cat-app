@@ -33,8 +33,8 @@ class ImageCard extends Component {
               this.handleClick(this.props.imageData)
             }}
           >
-          View Details
-        </LinkButton>
+            View Details
+          </LinkButton>
         </Card.Body>
       </Card>
 

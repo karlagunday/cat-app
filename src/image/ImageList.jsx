@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { CardColumns, Button } from 'react-bootstrap'
 import ImageCard from './ImageCard'
-import './ImageList.css'
 import { showMoreImages, showError } from '../actions'
 import {
   BrowserRouter as Router,
@@ -41,18 +40,26 @@ class ImageList extends Component {
 
     // display results as cards
     content = this.props.images.map(image => {
-      return <Col key={image.id} className="m-2" md={5}><ImageCard imageData={image} imageUrl={image.url} id={image.id} /></Col>
+      return <ImageCard key={image.id} imageData={image} imageUrl={image.url} id={image.id} />
     })
-    // @TODO - use <CardDeck> or <CardColumns>
+
     return (
-      <Container className="list">
+      <div className="m-4">
         <Router>
-          <Row>
-            { content }
-          </Row>
+          <CardColumns className="list">
+              { content }
+          </CardColumns>
         </Router>
-        { this.props.endOfPage === false ? <Button onClick={this.handleClick} variant="primary">Load More</Button>: '' }
-      </Container>
+        { this.props.endOfPage === false ?
+          <Button
+            onClick={this.handleClick}
+            variant="primary"
+            disabled={this.props.loading}
+          >
+            { this.props.loading ? "Loading..." : "Load More" }
+          </Button>
+        : '' }
+      </div>
 
      );
   }
