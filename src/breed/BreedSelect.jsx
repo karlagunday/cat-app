@@ -16,6 +16,10 @@ class BreedSelect extends Component {
       value: this.props.selectedBreed // default to state
     }
   }
+
+  /**
+   * Retrieves necessary data after the component has been mounted
+   */
   componentDidMount() {
     // retrieve list of available breeds for filtering
     this.getBreeds()
@@ -47,6 +51,10 @@ class BreedSelect extends Component {
       })
     }
   }
+
+  /**
+   * A select box of available breeds for filter
+   */
   render() {
     return (
       <React.Fragment>
@@ -68,6 +76,10 @@ class BreedSelect extends Component {
       </React.Fragment>
      );
   }
+
+  /**
+   * Retrieves all the available breeds
+   */
   getBreeds() {
     return this.state.api.retrieve()
   }

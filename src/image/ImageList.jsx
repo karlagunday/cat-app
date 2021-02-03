@@ -17,6 +17,10 @@ class ImageList extends Component {
     // make sure current page will be updated
     this.props.showMoreImages()
   }
+
+  /**
+   * The list of images represented in cards
+   */
   render() {
     let content;
     if (this.props.images && this.props.images.length <= 0) {

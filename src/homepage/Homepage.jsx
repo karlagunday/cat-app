@@ -11,6 +11,10 @@ class Homepage extends Component {
     super(props);
     this.state = {  }
   }
+
+  /**
+   * Renders the homepage and wraps the form, list component
+   */
   render() {
     return (
       <Container>

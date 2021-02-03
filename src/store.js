@@ -1,3 +1,7 @@
+/**
+ * Defines the store
+ */
+
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 

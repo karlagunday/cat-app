@@ -9,6 +9,10 @@ class ImageCard extends Component {
     super(props);
     this.state = {  }
   }
+
+  /**
+   * A card that represents a single image
+   */
   render() {
     return (
       <Card>

@@ -8,6 +8,7 @@ import {
 } from './imageActionTypes';
 import Image from '../../api/image';
 
+// action to set the current breed filter
 export const setImageFilter = (filter) => {
   return {
     type: SET_IMAGE_FILTER,
@@ -17,6 +18,7 @@ export const setImageFilter = (filter) => {
   };
 };
 
+// action when a request for images is made
 export const fetchFilteredImagesRequest = (filter) => {
   return {
     type: FETCH_FILTERED_IMAGES_REQUEST,
@@ -26,6 +28,7 @@ export const fetchFilteredImagesRequest = (filter) => {
   };
 };
 
+// action when the API responds with the list of images successfully
 export const fetchFilteredImagesSuccess = (images) => {
   return {
     type: FETCH_FILTERED_IMAGES_SUCCESS,
@@ -35,6 +38,7 @@ export const fetchFilteredImagesSuccess = (images) => {
   };
 };
 
+// action when the API fails to respond
 export const fetchFilteredImagesFailure = (error) => {
   return {
     type: FETCH_FILTERED_IMAGES_FAILURE,
@@ -44,12 +48,14 @@ export const fetchFilteredImagesFailure = (error) => {
   };
 };
 
+// action when the image list is cleared
 export const clearImages = () => {
   return {
     type: CLEAR_IMAGES,
   };
 };
 
+// action when the list has reached the end of the page
 export const setToEndOfPage = () => {
   return {
     type: SET_TO_END_OF_PAGE,
