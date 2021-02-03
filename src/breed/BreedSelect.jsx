@@ -14,8 +14,9 @@ class BreedSelect extends Component {
     this.state = {
       api: new Breed(), // class to connect to the api
       breeds: [],
-      value: this.props.selectedBreed // default to state
+      value: this.props.selectedParamValue, // default to state
     }
+    this.select = React.createRef()
   }
 
   /**
@@ -35,11 +36,12 @@ class BreedSelect extends Component {
           details: error.message
         })
       })
-  }
-  handleChange = (event) => {
 
-    // make sure the current state of the component is updated
-    const breed = event.target.value
+      // execute fetching of cats if value (in params) is set
+      const currentValue = this.select.current.getAttribute('data-selected')
+      this.handleChange(currentValue)
+  }
+  handleChange = (breed) => {
     this.setState({
       value: breed
     })
@@ -74,10 +76,13 @@ class BreedSelect extends Component {
         <Form.Label>{this.props.label}</Form.Label>
         <Form.Control
           value={this.state.value}
+          data-selected={this.props.selectedParamValue}
           as="select"
-          custom
-          onChange={this.handleChange}
+          onChange={(event) => {
+            this.handleChange(event.target.value)
+          }}
           disabled={this.props.loading}
+          ref={this.select}
         >
           <option value="">Select Breed</option>
           {

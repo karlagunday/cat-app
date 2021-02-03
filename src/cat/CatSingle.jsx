@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Card, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom'
+import { Card } from 'react-bootstrap';
 import { goBackToList } from '../actions'
+import CatLinkButton from './CatLinkButton'
 
 const CatSingle = (props) => {
   props = {
@@ -14,20 +14,19 @@ const CatSingle = (props) => {
     }
   }
   const dispatch = useDispatch()
-  const history = useHistory();
   return (
     <div className="d-flex justify-content-center m-4">
       <Card className="w-50">
         <Card.Header className="text-left">
-          <Button
-            variant="primary"
-            onClick={() => {
-              dispatch(goBackToList())
-              history.goBack()
-            }}
-          >
-            Back
-          </Button>
+          <CatLinkButton
+              to={`?breed=${props.data.breed.id}`}
+              className="btn btn-primary btn-block"
+              onClick={() => {
+                dispatch(goBackToList())
+              }}
+            >
+              Back
+          </CatLinkButton>
         </Card.Header>
         <Card.Img className="p-4" variant="top" src={props.data.url} />
         <Card.Body className="text-left">

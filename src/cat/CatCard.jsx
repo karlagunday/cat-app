@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Card } from 'react-bootstrap';
-import LinkButton from './CatLinkButton'
+import CatLinkButton from './CatLinkButton'
 import { setCurrentCat } from '../actions';
 
 /**
@@ -26,15 +26,15 @@ class CatCard extends Component {
       <Card>
         <Card.Img variant="top" src={this.props.catUrl} />
         <Card.Body>
-          <LinkButton
-            to={`/${this.props.id}`}
+          <CatLinkButton
+            to={`?cat=${this.props.id}`}
             className="btn btn-primary btn-block"
             onClick={() => {
               this.handleClick(this.props.catData)
             }}
           >
             View Details
-          </LinkButton>
+          </CatLinkButton>
         </Card.Body>
       </Card>
 

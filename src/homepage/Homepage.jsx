@@ -4,20 +4,23 @@ import { useLocation } from 'react-router-dom'
 import BreedSelect from '../breed/BreedSelect'
 import CatList from '../cat/CatList'
 import CatSingle from '../cat/CatSingle'
-import { setCurrentCat, showError } from '../actions'
+import { fetchFilteredCatsRequest, setCurrentCat, showError } from '../actions'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import Cat from '../api/cat';
 import { CAT_NOT_FOUND } from '../messages'
+import qs from 'qs'
 
 /**
  * Component to render the homepage
  */
-const Homepage = (prop) => {
+const Homepage = () => {
   // if currently located to a single page on initial load, update state to have the currentCat
   // of the selected cat
   const location = useLocation();
   const dispatch = useDispatch();
-  const catId = location.pathname.replace(/^\/+|\/+$/g, '')
+
+  // get url parameters
+  const { cat: catId, breed: breedId = "" } = qs.parse(location.search, { ignoreQueryPrefix: true })
   if (catId) {
     new Cat().retrieveById(catId)
       .then(result => {
@@ -51,7 +54,7 @@ const Homepage = (prop) => {
         <Col sm={3}>
           <Form className="filter">
             <Form.Group controlId="filter.SelectBreed" className="text-left">
-              <BreedSelect label="Breed" name="breed" id="breed"/>
+              <BreedSelect label="Breed" name="breed" id="breed" selectedParamValue={breedId}/>
             </Form.Group>
           </Form>
         </Col>

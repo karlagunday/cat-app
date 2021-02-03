@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
-const LinkButton = (props) => {
+const CatLinkButton = (props) => {
   const {
     history,
     location,
@@ -24,9 +24,9 @@ const LinkButton = (props) => {
   )
 }
 
-LinkButton.propTypes = {
+CatLinkButton.propTypes = {
   to: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired
 }
 
-export default withRouter(LinkButton)
+export default withRouter(CatLinkButton)
