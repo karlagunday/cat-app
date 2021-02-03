@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import ImageCard from './ImageCard'
 import './ImageList.css'
-import { showMoreImages } from '../actions'
+import { showMoreImages, showError } from '../actions'
 import {
   BrowserRouter as Router,
 } from 'react-router-dom'
+import { LOAD_LIST_ERROR } from '../messages'
 
 /**
  * Component to wrap the list of images
@@ -19,6 +20,12 @@ class ImageList extends Component {
   handleClick = () => {
     // make sure current page will be updated
     this.props.showMoreImages()
+      .catch(error => {
+        this.props.showError({
+          message: LOAD_LIST_ERROR,
+          details: error.message
+        })
+      })
   }
 
   /**
@@ -64,6 +71,7 @@ const mapSteteToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     showMoreImages: () => dispatch(showMoreImages()),
+    showError: (error) => dispatch(showError(error)),
   }
 }
 

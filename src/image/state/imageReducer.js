@@ -7,6 +7,7 @@ import {
   SET_TO_END_OF_PAGE,
   SET_CURRENT_IMAGE,
   GO_BACK_TO_LIST,
+  SHOW_ERROR,
 } from './imageActionTypes';
 
 // defiines how the state looks initially
@@ -50,6 +51,7 @@ const imageReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        error: '',
         images: action.payload.images,
       };
 
@@ -90,6 +92,15 @@ const imageReducer = (state = initialState, action) => {
       return {
         ...state,
         currentImage: null,
+      };
+
+    // resolves the action when an error occurs
+    // `error` should be of format: `{ message: 'Human-readable error', details: 'Erro message thrown'}`
+    case SHOW_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
       };
     default:
       return state;

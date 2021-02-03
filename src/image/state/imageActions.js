@@ -7,6 +7,7 @@ import {
   SET_TO_END_OF_PAGE,
   SET_CURRENT_IMAGE,
   GO_BACK_TO_LIST,
+  SHOW_ERROR,
 } from './imageActionTypes';
 import Image from '../../api/image';
 
@@ -81,6 +82,16 @@ export const goBackToList = (image) => {
   };
 };
 
+// action when user is going back from single page to list page
+export const showError = (error) => {
+  return {
+    type: SHOW_ERROR,
+    payload: {
+      error: error,
+    },
+  };
+};
+
 /**
  * Retrieves a list of unique images based on filter criteria
  * @param {Object} filter filter criteria to search resuslts with
@@ -91,7 +102,7 @@ export const fetchImages = (filter) => {
     dispatch(fetchFilteredImagesRequest(filter));
 
     // retrieve images based on the filter provided
-    new Image()
+    return new Image()
       .search(filter)
       .then((images) => {
         // update state with the list of filtered images
@@ -121,10 +132,7 @@ export const fetchImages = (filter) => {
         }
       })
       .catch((error) => {
-        dispatch(
-          // update state with the error message
-          fetchFilteredImagesFailure('This is an error message'),
-        );
+        throw new Error(error.message);
       });
   };
 };
@@ -133,7 +141,7 @@ export const fetchImages = (filter) => {
 export const showMoreImages = () => {
   return function (dispatch, getState) {
     const { filter } = getState(); // @TODO - update to have state separated for `image`
-    dispatch(
+    return dispatch(
       fetchImages({
         ...filter,
         page: filter.page + 1, // move to the next page to fetch more data

@@ -81,10 +81,7 @@ export default class Base {
       .get(url, options)
       .then((result) => result.data)
       .catch((error) => {
-        // @TODO - should this be an error code instead?
-        throw new Error(
-          'Apologies but we could not load new cats for you at this time! Miau!',
-        );
+        throw new Error(error.message);
       });
   }
 }

@@ -9,3 +9,4 @@ export const CLEAR_IMAGES = 'CLEAR_IMAGES';
 export const SET_TO_END_OF_PAGE = 'SET_TO_END_OF_PAGE';
 export const SET_CURRENT_IMAGE = 'SET_CURRENT_IMAGE';
 export const GO_BACK_TO_LIST = 'GO_BACK_TO_LIST';
+export const SHOW_ERROR = 'SHOW_ERROR';

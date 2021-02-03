@@ -9,4 +9,5 @@ export {
   clearImages,
   setCurrentImage,
   goBackToList,
+  showError,
 } from './image/state/imageActions';

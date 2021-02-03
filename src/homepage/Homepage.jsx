@@ -4,14 +4,15 @@ import { useLocation } from 'react-router-dom'
 import BreedSelect from '../breed/BreedSelect'
 import ImageList from '../image/ImageList'
 import ImageSingle from '../image/ImageSingle'
-import { setCurrentImage } from '../actions'
+import { setCurrentImage, showError } from '../actions'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import Image from '../api/image';
+import { CAT_NOT_FOUND } from '../messages'
 
 /**
  * Component to render the homepage
  */
-const Homepage = () => {
+const Homepage = (prop) => {
   // if currently located to a single page on initial load, update state to have the currentImage
   // of the selected image
   const location = useLocation();
@@ -22,8 +23,21 @@ const Homepage = () => {
       .then(result => {
         dispatch(setCurrentImage(result))
       })
+      .catch(error => {
+
+        // @TODO - dispatching this event will cause recursion
+        // and do the API call again
+        // how can this component be unsubscribed to any changes to the store?
+        // workaround was to not let this component render altogether
+        // which is handled in the root app component
+        // @TODO - issue with this workaround is it throws a `Can't perform a React state update on an unmounted component` error
+        dispatch(showError({
+          message: CAT_NOT_FOUND,
+          details: error.message
+        }))
+      })
   }
-  const currentImage = useSelector(state => state.currentImage)
+  const { currentImage } = useSelector(state => state)
   if (currentImage) {
     return (
       <ImageSingle data={currentImage}/>
