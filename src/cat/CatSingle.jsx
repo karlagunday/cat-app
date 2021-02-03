@@ -20,7 +20,7 @@ const CatSingle = (props) => {
         <Card.Header className="text-left">
           <CatLinkButton
               to={`?breed=${props.data.breed.id}`}
-              className="btn btn-primary btn-block"
+              className="btn btn-primary"
               onClick={() => {
                 dispatch(goBackToList())
               }}
