@@ -67,7 +67,7 @@ class ImageList extends Component {
 
 // connect component to store
 // @TODO - create a `selectors` file?
-const mapSteteToProps = state => {
+const mapStateToProps = state => {
   return {
     images: state.images,
     loading: state.loading,
@@ -82,4 +82,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapSteteToProps, mapDispatchToProps)(ImageList);
+export default connect(mapStateToProps, mapDispatchToProps)(ImageList);

@@ -100,7 +100,7 @@ class BreedSelect extends Component {
 
 // connect component to store
 // @TODO - create a `selectors` file?
-const mapSteteToProps = state => {
+const mapStateToProps = state => {
   return {
     selectedBreed: state.filter.breed_id,
     images: state.images,
@@ -115,6 +115,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 export default connect(
-  mapSteteToProps,
+  mapStateToProps,
   mapDispatchToProps
 )(BreedSelect);

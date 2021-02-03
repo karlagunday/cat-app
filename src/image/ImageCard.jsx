@@ -44,7 +44,7 @@ class ImageCard extends Component {
 
 // connect component to store
 // @TODO - create a `selectors` file?
-const mapSteteToProps = state => {
+const mapStateToProps = state => {
   return {}
 }
 const mapDispatchToProps = dispatch => {
@@ -53,4 +53,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapSteteToProps, mapDispatchToProps)(ImageCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ImageCard);
