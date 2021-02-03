@@ -1,5 +1,4 @@
 import {
-  SET_IMAGE_FILTER,
   FETCH_FILTERED_IMAGES_REQUEST,
   FETCH_FILTERED_IMAGES_SUCCESS,
   FETCH_FILTERED_IMAGES_FAILURE,
@@ -10,16 +9,6 @@ import {
   SHOW_ERROR,
 } from './imageActionTypes';
 import Image from '../../api/image';
-
-// action to set the current breed filter
-export const setImageFilter = (filter) => {
-  return {
-    type: SET_IMAGE_FILTER,
-    payload: {
-      filter: filter,
-    },
-  };
-};
 
 // action when a request for images is made
 export const fetchFilteredImagesRequest = (filter) => {

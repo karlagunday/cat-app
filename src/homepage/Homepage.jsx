@@ -37,6 +37,8 @@ const Homepage = (prop) => {
         }))
       })
   }
+
+  // render as single page if an image is selected
   const { currentImage } = useSelector(state => state)
   if (currentImage) {
     return (

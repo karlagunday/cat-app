@@ -1,5 +1,4 @@
 import {
-  SET_IMAGE_FILTER,
   FETCH_FILTERED_IMAGES_REQUEST,
   FETCH_FILTERED_IMAGES_SUCCESS,
   FETCH_FILTERED_IMAGES_FAILURE,
@@ -24,16 +23,6 @@ const initialState = {
 
 const imageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_IMAGE_FILTER:
-      // set the current filter
-      return {
-        ...state,
-        filter: {
-          ...state.filter,
-          ...action.payload.filter,
-        },
-      };
-
     // resolves the action when a fetch request is made
     case FETCH_FILTERED_IMAGES_REQUEST:
       return {

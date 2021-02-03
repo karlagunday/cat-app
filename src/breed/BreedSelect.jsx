@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Form } from 'react-bootstrap';
 import Breed from '../api/breed'
-import { setImageFilter, fetchImages, clearImages, showError } from '../actions';
+import { fetchImages, clearImages, showError } from '../actions';
 import { STANDARD_ERROR, LOAD_LIST_ERROR } from '../messages'
 
 /**
@@ -53,7 +53,7 @@ class BreedSelect extends Component {
       this.props.fetchImages({
         breed_id: breed,
         page: 0, // every time breed changes, start at the first page
-        limit: 10, // @TODO - handle pagination better?
+        limit: 10,
         order: 'Asc'
       })
       .catch(error => {
@@ -110,7 +110,6 @@ const mapSteteToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     clearImages: () => dispatch(clearImages()),
-    setImageFilter: (filter) => dispatch(setImageFilter(filter)),
     fetchImages: (filter) => dispatch(fetchImages(filter)),
     showError: (error) => dispatch(showError(error))
   }
