@@ -5,6 +5,8 @@ import {
   FETCH_FILTERED_IMAGES_FAILURE,
   CLEAR_IMAGES,
   SET_TO_END_OF_PAGE,
+  SET_CURRENT_IMAGE,
+  GO_BACK_TO_LIST,
 } from './imageActionTypes';
 import Image from '../../api/image';
 
@@ -59,6 +61,23 @@ export const clearImages = () => {
 export const setToEndOfPage = () => {
   return {
     type: SET_TO_END_OF_PAGE,
+  };
+};
+
+// action when the a single image is selected to be rendered
+export const setCurrentImage = (image) => {
+  return {
+    type: SET_CURRENT_IMAGE,
+    payload: {
+      currentImage: image,
+    },
+  };
+};
+
+// action when user is going back from single page to list page
+export const goBackToList = (image) => {
+  return {
+    type: GO_BACK_TO_LIST,
   };
 };
 

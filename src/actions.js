@@ -7,4 +7,6 @@ export {
   fetchImages,
   showMoreImages,
   clearImages,
+  setCurrentImage,
+  goBackToList,
 } from './image/state/imageActions';

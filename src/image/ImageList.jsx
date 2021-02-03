@@ -4,6 +4,9 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import ImageCard from './ImageCard'
 import './ImageList.css'
 import { showMoreImages } from '../actions'
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom'
 
 /**
  * Component to wrap the list of images
@@ -31,13 +34,16 @@ class ImageList extends Component {
 
     // display results as cards
     content = this.props.images.map(image => {
-      return <Col key={image.id} className="m-2" md={5}><ImageCard imageUrl={image.url} id={image.id} /></Col>
+      return <Col key={image.id} className="m-2" md={5}><ImageCard imageData={image} imageUrl={image.url} id={image.id} /></Col>
     })
+    // @TODO - use <CardDeck> or <CardColumns>
     return (
       <Container className="list">
-        <Row>
-          { content }
-        </Row>
+        <Router>
+          <Row>
+            { content }
+          </Row>
+        </Router>
         { this.props.endOfPage === false ? <Button onClick={this.handleClick} variant="primary">Load More</Button>: '' }
       </Container>
 

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { connect } from 'react-redux'
+import { Card } from 'react-bootstrap';
+import LinkButton from './ImageLinkButton'
+import { setCurrentImage } from '../actions';
 
 /**
  * Component to render a card of an image
@@ -8,6 +11,11 @@ class ImageCard extends Component {
   constructor(props) {
     super(props);
     this.state = {  }
+  }
+  handleClick = (imageData) => {
+    // add current image data to state to avoid refetching from API
+    // and instead reuse whatever data has already been fetched for the selected image
+    this.props.setCurrentImage(imageData)
   }
 
   /**
@@ -18,7 +26,15 @@ class ImageCard extends Component {
       <Card>
         <Card.Img variant="top" src={this.props.imageUrl} />
         <Card.Body>
-          <Button variant="primary">View Details</Button>
+          <LinkButton
+            to={`/${this.props.id}`}
+            className="btn btn-primary btn-block"
+            onClick={() => {
+              this.handleClick(this.props.imageData)
+            }}
+          >
+          View Details
+        </LinkButton>
         </Card.Body>
       </Card>
 
@@ -26,4 +42,15 @@ class ImageCard extends Component {
   }
 }
 
-export default ImageCard;
+// connect component to store
+// @TODO - create a `selectors` file?
+const mapSteteToProps = state => {
+  return {}
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    setCurrentImage: (image) => dispatch(setCurrentImage(image)),
+  }
+}
+
+export default connect(mapSteteToProps, mapDispatchToProps)(ImageCard);

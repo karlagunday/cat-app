@@ -1,5 +1,6 @@
 import './App.css';
 import Homepage from '../homepage/Homepage';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
@@ -7,7 +8,9 @@ function App() {
       <header className="App-header">
         <h1>Cat Browser</h1>
       </header>
-      <Homepage />
+      <Router>
+        <Homepage />
+      </Router>
     </div>
   );
 }

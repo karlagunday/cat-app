@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import BreedSelect from '../breed/BreedSelect'
 import ImageList from '../image/ImageList'
+import ImageSingle from '../image/ImageSingle'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 
 /**
@@ -16,6 +18,11 @@ class Homepage extends Component {
    * Renders the homepage and wraps the form, list component
    */
   render() {
+    if (this.props.currentImage) {
+      return (
+        <ImageSingle data={this.props.currentImage}/>
+      );
+    }
     return (
       <Container>
         <Row>
@@ -35,4 +42,12 @@ class Homepage extends Component {
   }
 }
 
-export default Homepage;
+// connect component to store
+// @TODO - create a `selectors` file?
+const mapSteteToProps = state => {
+  return {
+    currentImage: state.currentImage
+  }
+}
+
+export default connect(mapSteteToProps)(Homepage);

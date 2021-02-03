@@ -89,7 +89,7 @@ class BreedSelect extends Component {
 // @TODO - create a `selectors` file?
 const mapSteteToProps = state => {
   return {
-    selectedBreed: state.filter.breed,
+    selectedBreed: state.filter.breed_id,
     images: state.images,
     loading: state.loading
   }

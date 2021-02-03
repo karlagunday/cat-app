@@ -5,6 +5,8 @@ import {
   FETCH_FILTERED_IMAGES_FAILURE,
   CLEAR_IMAGES,
   SET_TO_END_OF_PAGE,
+  SET_CURRENT_IMAGE,
+  GO_BACK_TO_LIST,
 } from './imageActionTypes';
 
 // defiines how the state looks initially
@@ -16,6 +18,7 @@ const initialState = {
   page: 0,
   limit: 10,
   endOfPage: false,
+  currentImage: null,
 };
 
 const imageReducer = (state = initialState, action) => {
@@ -73,6 +76,20 @@ const imageReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         endOfPage: true,
+      };
+
+    // resolves the action when the list has reached the end of the page
+    case SET_CURRENT_IMAGE:
+      return {
+        ...state,
+        currentImage: action.payload.currentImage,
+      };
+
+    // resolves the action when user goes back from the single page to the list page
+    case GO_BACK_TO_LIST:
+      return {
+        ...state,
+        currentImage: null,
       };
     default:
       return state;
