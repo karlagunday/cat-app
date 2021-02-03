@@ -2,26 +2,26 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import BreedSelect from '../breed/BreedSelect'
-import ImageList from '../image/ImageList'
-import ImageSingle from '../image/ImageSingle'
-import { setCurrentImage, showError } from '../actions'
+import CatList from '../cat/CatList'
+import CatSingle from '../cat/CatSingle'
+import { setCurrentCat, showError } from '../actions'
 import { Container, Row, Col, Form } from 'react-bootstrap'
-import Image from '../api/image';
+import Cat from '../api/cat';
 import { CAT_NOT_FOUND } from '../messages'
 
 /**
  * Component to render the homepage
  */
 const Homepage = (prop) => {
-  // if currently located to a single page on initial load, update state to have the currentImage
-  // of the selected image
+  // if currently located to a single page on initial load, update state to have the currentCat
+  // of the selected cat
   const location = useLocation();
   const dispatch = useDispatch();
-  const imageId = location.pathname.replace(/^\/+|\/+$/g, '')
-  if (imageId) {
-    new Image().retrieveById(imageId)
+  const catId = location.pathname.replace(/^\/+|\/+$/g, '')
+  if (catId) {
+    new Cat().retrieveById(catId)
       .then(result => {
-        dispatch(setCurrentImage(result))
+        dispatch(setCurrentCat(result))
       })
       .catch(error => {
 
@@ -38,11 +38,11 @@ const Homepage = (prop) => {
       })
   }
 
-  // render as single page if an image is selected
-  const { currentImage } = useSelector(state => state)
-  if (currentImage) {
+  // render as single page if an cat is selected
+  const { currentCat } = useSelector(state => state)
+  if (currentCat) {
     return (
-      <ImageSingle data={currentImage}/>
+      <CatSingle data={currentCat}/>
     );
   }
   return (
@@ -56,7 +56,7 @@ const Homepage = (prop) => {
           </Form>
         </Col>
         <Col>
-          <ImageList />
+          <CatList />
         </Col>
       </Row>
     </Container>

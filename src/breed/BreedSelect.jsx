@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Form } from 'react-bootstrap';
 import Breed from '../api/breed'
-import { fetchImages, clearImages, showError } from '../actions';
+import { fetchCats, clearCats, showError } from '../actions';
 import { STANDARD_ERROR, LOAD_LIST_ERROR } from '../messages'
 
 /**
@@ -45,12 +45,12 @@ class BreedSelect extends Component {
     })
 
     // since filter has been changed, the current list needs to be cleared first
-    this.props.clearImages()
+    this.props.clearCats()
 
-    // only fetch images if breed filter is provided
+    // only fetch cats if breed filter is provided
     if (breed) {
-      // dispatch fetching of images with the provided filter params
-      this.props.fetchImages({
+      // dispatch fetching of cats with the provided filter params
+      this.props.fetchCats({
         breed_id: breed,
         page: 0, // every time breed changes, start at the first page
         limit: 10,
@@ -103,14 +103,14 @@ class BreedSelect extends Component {
 const mapStateToProps = state => {
   return {
     selectedBreed: state.filter.breed_id,
-    images: state.images,
+    cats: state.cats,
     loading: state.loading
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    clearImages: () => dispatch(clearImages()),
-    fetchImages: (filter) => dispatch(fetchImages(filter)),
+    clearCats: () => dispatch(clearCats()),
+    fetchCats: (filter) => dispatch(fetchCats(filter)),
     showError: (error) => dispatch(showError(error))
   }
 }

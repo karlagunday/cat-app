@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { CardColumns, Button } from 'react-bootstrap'
-import ImageCard from './ImageCard'
-import { showMoreImages, showError } from '../actions'
+import CatCard from './CatCard'
+import { showMoreCats, showError } from '../actions'
 import {
   BrowserRouter as Router,
 } from 'react-router-dom'
 import { LOAD_LIST_ERROR } from '../messages'
 
 /**
- * Component to wrap the list of images
+ * Component to wrap the list of cats
  */
-class ImageList extends Component {
+class CatList extends Component {
   constructor(props) {
     super(props);
     this.state = {  }
   }
   handleClick = () => {
     // make sure current page will be updated
-    this.props.showMoreImages()
+    this.props.showMoreCats()
       .catch(error => {
         this.props.showError({
           message: LOAD_LIST_ERROR,
@@ -28,19 +28,19 @@ class ImageList extends Component {
   }
 
   /**
-   * The list of images represented in cards
+   * The list of cats represented in cards
    */
   render() {
     let content;
-    if (this.props.images && this.props.images.length <= 0) {
+    if (this.props.cats && this.props.cats.length <= 0) {
       return (
         <p>No cats available</p>
       )
     }
 
     // display results as cards
-    content = this.props.images.map(image => {
-      return <ImageCard key={image.id} imageData={image} imageUrl={image.url} id={image.id} />
+    content = this.props.cats.map(cat => {
+      return <CatCard key={cat.id} catData={cat} catUrl={cat.url} id={cat.id} />
     })
 
     return (
@@ -69,7 +69,7 @@ class ImageList extends Component {
 // @TODO - create a `selectors` file?
 const mapStateToProps = state => {
   return {
-    images: state.images,
+    cats: state.cats,
     loading: state.loading,
     page: state.filter.page,
     endOfPage: state.endOfPage,
@@ -77,9 +77,9 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    showMoreImages: () => dispatch(showMoreImages()),
+    showMoreCats: () => dispatch(showMoreCats()),
     showError: (error) => dispatch(showError(error)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageList);
+export default connect(mapStateToProps, mapDispatchToProps)(CatList);

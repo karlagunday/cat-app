@@ -4,13 +4,13 @@ import { Card, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom'
 import { goBackToList } from '../actions'
 
-const ImageSingle = (props) => {
+const CatSingle = (props) => {
   props = {
     ...props,
     data: {
       ...props.data,
       breeds: null,
-      breed: props.data.breeds[0], // assumin an image always has a single breed
+      breed: props.data.breeds[0], // assuming a cat always has a single breed
     }
   }
   const dispatch = useDispatch()
@@ -43,4 +43,4 @@ const ImageSingle = (props) => {
   );
 }
 
-export default ImageSingle
+export default CatSingle

@@ -1,30 +1,30 @@
 import {
-  FETCH_FILTERED_IMAGES_REQUEST,
-  FETCH_FILTERED_IMAGES_SUCCESS,
-  FETCH_FILTERED_IMAGES_FAILURE,
-  CLEAR_IMAGES,
+  FETCH_FILTERED_CATS_REQUEST,
+  FETCH_FILTERED_CATS_SUCCESS,
+  FETCH_FILTERED_CATS_FAILURE,
+  CLEAR_CATS,
   SET_TO_END_OF_PAGE,
-  SET_CURRENT_IMAGE,
+  SET_CURRENT_CAT,
   GO_BACK_TO_LIST,
   SHOW_ERROR,
-} from './imageActionTypes';
+} from './catActionTypes';
 
 // defiines how the state looks initially
 const initialState = {
   loading: false,
-  images: [],
+  cats: [],
   error: '',
   filter: {}, // by default, no filter is applied
   page: 0,
   limit: 10,
   endOfPage: false,
-  currentImage: null,
+  currentCat: null,
 };
 
-const imageReducer = (state = initialState, action) => {
+const catReducer = (state = initialState, action) => {
   switch (action.type) {
     // resolves the action when a fetch request is made
-    case FETCH_FILTERED_IMAGES_REQUEST:
+    case FETCH_FILTERED_CATS_REQUEST:
       return {
         ...state,
         loading: true,
@@ -35,30 +35,30 @@ const imageReducer = (state = initialState, action) => {
         },
       };
 
-    // resolves the action when images have been successfully fetched from the API
-    case FETCH_FILTERED_IMAGES_SUCCESS:
+    // resolves the action when cats have been successfully fetched from the API
+    case FETCH_FILTERED_CATS_SUCCESS:
       return {
         ...state,
         loading: false,
         error: '',
-        images: action.payload.images,
+        cats: action.payload.cats,
       };
 
-    // resolves the action when fetching of images fails
-    case FETCH_FILTERED_IMAGES_FAILURE:
+    // resolves the action when fetching of cats fails
+    case FETCH_FILTERED_CATS_FAILURE:
       return {
         ...state,
         loading: false,
-        images: [],
+        cats: [],
         error: action.payload.error,
       };
 
-    // resolves the action when clearning images from the list
-    case CLEAR_IMAGES:
+    // resolves the action when clearning cats from the list
+    case CLEAR_CATS:
       return {
         ...state,
-        images: [],
-        endOfPage: false, // clearing the images will reset page back to beginning
+        cats: [],
+        endOfPage: false, // clearing the cats will reset page back to beginning
       };
 
     // resolves the action when the list has reached the end of the page
@@ -70,17 +70,17 @@ const imageReducer = (state = initialState, action) => {
       };
 
     // resolves the action when the list has reached the end of the page
-    case SET_CURRENT_IMAGE:
+    case SET_CURRENT_CAT:
       return {
         ...state,
-        currentImage: action.payload.currentImage,
+        currentCat: action.payload.currentCat,
       };
 
     // resolves the action when user goes back from the single page to the list page
     case GO_BACK_TO_LIST:
       return {
         ...state,
-        currentImage: null,
+        currentCat: null,
       };
 
     // resolves the action when an error occurs
@@ -96,4 +96,4 @@ const imageReducer = (state = initialState, action) => {
   }
 };
 
-export default imageReducer;
+export default catReducer;

@@ -3,10 +3,10 @@
  */
 // @TODO - refactor to handle autoloading?
 export {
-  fetchImages,
-  showMoreImages,
-  clearImages,
-  setCurrentImage,
+  fetchCats,
+  showMoreCats,
+  clearCats,
+  setCurrentCat,
   goBackToList,
   showError,
-} from './image/state/imageActions';
+} from './cat/state/catActions';
