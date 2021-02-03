@@ -1,4 +1,5 @@
-import React, { useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Card, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom'
 import { goBackToList } from '../actions'

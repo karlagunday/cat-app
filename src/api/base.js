@@ -22,6 +22,16 @@ export default class Base {
   }
 
   /**
+   * Retrieves a single record by id
+   * @param {String} id String of the ID
+   * @param {Object} options Optional request options supported by Axios
+   * @return {Promise} Data retrieved from the API
+   */
+  retrieveById(id, options = {}) {
+    return this.get(`/${id}`, options);
+  }
+
+  /**
    * Retrieves data from the API based on the provided search criteria
    * @param {Object} filters Object of filter/search criteria
    * @param {Object} options Optional request options supported by Axios
