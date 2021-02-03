@@ -4,15 +4,21 @@ import { Card } from 'react-bootstrap';
 import { goBackToList } from '../actions'
 import CatLinkButton from './CatLinkButton'
 
+/**
+ * The single cat component
+ * @param {Object} props The component properties
+ */
 const CatSingle = (props) => {
   props = {
     ...props,
     data: {
-      ...props.data,
-      breeds: null,
-      breed: props.data.breeds[0], // assuming a cat always has a single breed
+      ...props.data, // merge cat data with props
+      breeds: null, // empty out breeds array
+      breed: props.data.breeds[0], // and assign it here, assuming a cat always has a single breed
     }
   }
+
+  // use hooks
   const dispatch = useDispatch()
   return (
     <div className="d-flex justify-content-center m-4">
@@ -22,6 +28,8 @@ const CatSingle = (props) => {
               to={`?breed=${props.data.breed.id}`}
               className="btn btn-primary"
               onClick={() => {
+
+                // update state to indicate that it is going back to the list page
                 dispatch(goBackToList())
               }}
             >

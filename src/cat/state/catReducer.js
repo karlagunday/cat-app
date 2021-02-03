@@ -9,7 +9,7 @@ import {
   SHOW_ERROR,
 } from './catActionTypes';
 
-// defiines how the state looks initially
+// defines how the state looks initially
 const initialState = {
   loading: false,
   cats: [],

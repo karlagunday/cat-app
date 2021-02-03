@@ -15,11 +15,11 @@ import qs from 'qs'
  */
 const Homepage = () => {
   // if currently located to a single page on initial load, update state to have the currentCat
-  // of the selected cat
   const location = useLocation();
   const dispatch = useDispatch();
 
   // get url parameters
+  // breedId to be used as the default selected breed, if set
   const { cat: catId, breed: breedId = "" } = qs.parse(location.search, { ignoreQueryPrefix: true })
   if (catId) {
     new Cat().retrieveById(catId)
@@ -48,6 +48,8 @@ const Homepage = () => {
       <CatSingle data={currentCat}/>
     );
   }
+
+  // else, render the filter form + list
   return (
     <Container>
       <Row>

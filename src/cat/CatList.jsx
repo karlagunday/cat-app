@@ -43,6 +43,9 @@ class CatList extends Component {
       return <CatCard key={cat.id} catData={cat} catUrl={cat.url} id={cat.id} />
     })
 
+    // @TODO - CardColumns kind of messes up the arrangement of the cards
+    // which i think is intentional since it tries to cram the cards in the spaces
+    // and it is using vertical alignment
     return (
       <div className="m-4">
         <Router>
