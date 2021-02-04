@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import BreedSelect from '../breed/BreedSelect'
 import CatList from '../cat/CatList'
 import CatSingle from '../cat/CatSingle'
-import { fetchFilteredCatsRequest, setCurrentCat, showError } from '../actions'
+import { setCurrentCat, showError } from '../actions'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import Cat from '../api/cat';
 import { CAT_NOT_FOUND } from '../messages'
