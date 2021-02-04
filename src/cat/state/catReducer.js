@@ -15,8 +15,6 @@ const initialState = {
   cats: [],
   error: '',
   filter: {}, // by default, no filter is applied
-  page: 0,
-  limit: 10,
   endOfPage: false,
   currentCat: null,
 };
